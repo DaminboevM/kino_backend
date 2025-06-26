@@ -22,5 +22,4 @@ export class Profile extends Model{
 
     @BelongsTo(() => User)
     user: User
-
 }

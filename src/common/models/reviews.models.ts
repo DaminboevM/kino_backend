@@ -3,8 +3,8 @@ import { v4 as uuidv4 } from 'uuid'
 import { User } from "./user.models";
 import { Movies } from "./movies.models";
 
-@Table({tableName: 'favorites'})
-export class Favorites extends Model{
+@Table({tableName: 'rewievs'})
+export class Rewievs extends Model{
     @Column({type: DataType.UUID, defaultValue: uuidv4(), primaryKey: true})
     declare id: string
 

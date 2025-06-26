@@ -1,7 +1,12 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { SubscriptionType } from "src/core/type/user";
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { SubscriptionType } from "src/core/type/types";
 import { v4 as uuidv4 } from 'uuid'
 import { User } from "./user.models";
+import { MovieCategories } from "./movie_categories.models";
+import { MovieFiles } from "./movie_files.models";
+import { Favorites } from "./favorites.models";
+import { Rewievs } from "./reviews.models";
+import { WatchHistory } from "./watch_history.models";
 
 @Table({tableName: 'movies'})
 export class Movies extends Model{
@@ -26,7 +31,7 @@ export class Movies extends Model{
     @Column({type: DataType.STRING})
     poster_url: string
 
-    @Column({type: DataType.DECIMAL(2,1)})
+    @Column({type: DataType.DECIMAL(3,1)})
     rating: number
 
     @Column({type: DataType.ENUM(...Object.values(SubscriptionType)), defaultValue: SubscriptionType.free})
@@ -41,4 +46,19 @@ export class Movies extends Model{
 
     @BelongsTo(() => User)
     user: User
+
+    @HasMany(() => MovieCategories)
+    movieCategory: MovieCategories[]
+
+    @HasMany(() => MovieFiles)
+    moviesFiles: MovieFiles[]
+
+    @HasMany(() => Favorites)
+    favorites: Favorites[]
+
+    @HasMany(() => Rewievs)
+    rewievs: Rewievs[]
+
+    @HasMany(() => WatchHistory)
+    watchHistory: WatchHistory
 }

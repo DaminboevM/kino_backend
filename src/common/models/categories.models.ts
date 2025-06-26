@@ -1,5 +1,6 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { v4 as uuidv4 } from 'uuid'
+import { MovieCategories } from "./movie_categories.models";
 
 @Table({tableName: 'categories'})
 export class Categories extends Model{
@@ -14,4 +15,7 @@ export class Categories extends Model{
 
     @Column({type: DataType.TEXT})
     description: string
+
+    @HasMany(() => MovieCategories)
+    movieCategories: MovieCategories[]    
 }

@@ -1,17 +1,17 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { Status } from "src/core/type/user";
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { Status } from "src/core/type/types";
 import { v4 as uuidv4 } from 'uuid'
 import { User } from "./user.models";
 import { SubscriptionPlans } from "./subscription_plans.models";
+import { Payments } from "./payments.models";
 
 @Table({tableName: 'user_subscriptions'})
 export class UserSubscriptions extends Model {
     @Column({type: DataType.UUID, defaultValue: uuidv4(), primaryKey: true})
     declare id: string
 
-    @Column({type: DataType.DATE, defaultValue: DataType.NOW })
+    @Column({type: DataType.DATE, defaultValue: new Date() })
     start_date: Date;
-
 
     @Column({type: DataType.ENUM(...Object.values(Status)), defaultValue: Status.pending_payment})
     status: Status
@@ -32,4 +32,7 @@ export class UserSubscriptions extends Model {
 
     @BelongsTo(() => SubscriptionPlans)
     subscription_plans: SubscriptionPlans
+
+    @HasMany(() => Payments)
+    payments?: Payments[]
 }

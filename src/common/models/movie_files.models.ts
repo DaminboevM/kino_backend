@@ -1,5 +1,5 @@
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { Language, Quality } from "src/core/type/user";
+import { Language, Quality } from "src/core/type/types";
 import { v4 as uuidv4 } from 'uuid'
 import { Movies } from "./movies.models";
 

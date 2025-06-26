@@ -1,5 +1,5 @@
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { PaymentMethod, PymentStatus } from "src/core/type/user";
+import { PaymentMethod, PymentStatus } from "src/core/type/types";
 import { v4 as uuidv4 } from 'uuid'
 import { UserSubscriptions } from "./user_subscriptions.models";
 
