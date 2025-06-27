@@ -15,14 +15,14 @@ export class Rewievs extends Model{
     comment: string
 
     @ForeignKey(() => User)
-    @Column({type: DataType.UUID})
+    @Column({type: DataType.UUID, onDelete: 'CASCADE'})
     user_id: string
 
     @BelongsTo(() => User)
     user: User
 
     @ForeignKey(() => Movies)
-    @Column({type: DataType.UUID})
+    @Column({type: DataType.UUID, onDelete: 'CASCADE'})
     movie_id: string
 
     @BelongsTo(() => Movies)

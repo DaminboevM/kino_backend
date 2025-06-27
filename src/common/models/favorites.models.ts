@@ -9,14 +9,14 @@ export class Favorites extends Model{
     declare id: string
 
     @ForeignKey(() => Movies)
-    @Column({type: DataType.UUID})
+    @Column({type: DataType.UUID, onDelete: 'CASCADE'})
     movie_id: string
 
     @BelongsTo(() => Movies)
     movie: Movies
 
     @ForeignKey(() => User)
-    @Column({type: DataType.UUID})
+    @Column({type: DataType.UUID, onDelete: 'CASCADE'})
     user_id: string
 
     @BelongsTo(() => User)

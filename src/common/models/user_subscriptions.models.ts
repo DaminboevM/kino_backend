@@ -20,14 +20,14 @@ export class UserSubscriptions extends Model {
     auto_renew: boolean
 
     @ForeignKey(() => User)
-    @Column({type: DataType.UUID})
+    @Column({type: DataType.UUID, onDelete: 'CASCADE'})
     user_id: string
 
     @BelongsTo(() => User)
     user: User
 
     @ForeignKey(() => SubscriptionPlans)
-    @Column({type: DataType.UUID})
+    @Column({type: DataType.UUID, onDelete: 'CASCADE'})
     plan_id: string
 
     @BelongsTo(() => SubscriptionPlans)

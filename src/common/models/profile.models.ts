@@ -17,7 +17,7 @@ export class Profile extends Model{
     country: string
 
     @ForeignKey(() => User)
-    @Column({type: DataType.UUID})
+    @Column({type: DataType.UUID, onDelete: 'CASCADE'})
     user_id: string
 
     @BelongsTo(() => User)

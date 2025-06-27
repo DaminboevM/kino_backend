@@ -41,7 +41,7 @@ export class Movies extends Model{
     view_count: number
 
     @ForeignKey(() => User)
-    @Column({type: DataType.UUID})
+    @Column({type: DataType.UUID, onDelete: 'CASCADE'})
     created_by: string
 
     @BelongsTo(() => User)

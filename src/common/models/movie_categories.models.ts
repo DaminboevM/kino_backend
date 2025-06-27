@@ -9,14 +9,14 @@ export class MovieCategories extends Model{
     declare id: string
 
     @ForeignKey(() => Movies)
-    @Column({type: DataType.UUID})
+    @Column({type: DataType.UUID, onDelete: 'CASCADE'})
     movie_id: string
 
     @BelongsTo(() => Movies)
     movie: Movies
 
     @ForeignKey(() => Categories)
-    @Column({type: DataType.UUID})
+    @Column({type: DataType.UUID, onDelete: 'CASCADE'})
     category_id: string
 
     @BelongsTo(() => Categories)

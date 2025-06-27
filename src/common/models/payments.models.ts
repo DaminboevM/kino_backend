@@ -24,7 +24,7 @@ export class Payments extends Model{
     external_transaction_id: string
 
     @ForeignKey(() => UserSubscriptions)
-    @Column({type: DataType.UUID})
+    @Column({type: DataType.UUID, onDelete: 'CASCADE'})
     user_subscription_id: string
 
     @BelongsTo(() => UserSubscriptions)
