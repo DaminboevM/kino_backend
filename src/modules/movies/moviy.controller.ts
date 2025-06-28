@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UnsupportedMediaTypeException, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Req, UnsupportedMediaTypeException, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { MoviyService } from './moviy.service';
 import { Express } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -17,7 +17,8 @@ import { Roles } from 'src/core/decorator/role.decorator';
 export class MoviyController {
     constructor(private readonly service: MoviyService) {}
 
-    
+    @UseGuards(AuthGuard, RolesGuard)
+    @Roles(UserRole.SUPERADMIN, UserRole.ADMIN)
     @Get()
     getAllMovies () {
         return this.service.getAll()
@@ -26,7 +27,7 @@ export class MoviyController {
 
     @Get(':id')
     getOneMovy(@Param('id') id:string) {
-        return this.service.getOneMovy(id)    
+        return this.service.getOneMovy(id)  
     }
 
 
@@ -47,9 +48,8 @@ export class MoviyController {
                 }
             }
     ))
-    createMovie(@UploadedFile() poster: Express.Multer.File, @Body() payload: CreateMovieDto) {
-        const id = '7d1f1389-9422-48f3-a8c0-04bb06eb6c0d'
-        return this.service.create(id, payload, poster.filename)
+    createMovie(@UploadedFile() poster: Express.Multer.File, @Body() payload: CreateMovieDto, @Req() req: Request) {
+        return this.service.create(req['user'].id, payload, poster.filename)
     }
 
 

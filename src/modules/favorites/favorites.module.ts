@@ -12,4 +12,4 @@ import { JwtModule } from '@nestjs/jwt';
     providers: [FavoritesService],
     controllers: [FavoritesController]
 })
-export class FavoritesModule {}
+export class FavoritesModule {} 

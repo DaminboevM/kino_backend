@@ -1,21 +1,34 @@
-import { IsNotEmpty, IsOptional, IsString, IsUUID } from "class-validator";
+import { IsNotEmpty, IsOptional, IsPhoneNumber, IsString, IsUUID } from "class-validator";
 
 export class UserUpdateDto {
-
-    @IsString()
-    @IsNotEmpty()
-    @IsUUID('4')
-    id: string
+    
 
     @IsOptional()
     @IsString()
     username?: string
+   
+
+    @IsOptional()
+    @IsString()
+    email?: string
+
 
     @IsOptional()
     @IsString()
     password?: string
 
-    @IsOptional()
+
     @IsString()
-    email?: string
+    @IsOptional()
+    avatar_url?: string
+
+
+    @IsPhoneNumber()
+    @IsOptional()
+    phone: string
+
+
+    @IsString()
+    @IsOptional()
+    country: string
 }

@@ -5,6 +5,8 @@ import { User } from "./user.models";
 import { SubscriptionPlans } from "./subscription_plans.models";
 import { Payments } from "./payments.models";
 
+
+
 @Table({tableName: 'user_subscriptions'})
 export class UserSubscriptions extends Model {
     @Column({type: DataType.UUID, defaultValue: uuidv4(), primaryKey: true})

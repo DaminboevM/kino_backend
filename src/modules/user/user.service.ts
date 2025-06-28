@@ -6,6 +6,8 @@ import { AddAdminDto } from './dto/addAdmin.dto';
 import { Op } from 'sequelize'
 import { UserRole } from 'src/core/type/types';
 import { UuidParamDto } from './dto/param.dto';
+import { hashPass } from 'src/common/config/bcrypt/bcrypt';
+
 
 @Injectable()
 export class UsersService {
@@ -24,8 +26,8 @@ export class UsersService {
     async addAdmin(payload: Required<AddAdminDto>) {
         const data = await this.userModel.findOne({ where: { [Op.or]: [ { username: payload.username }, { email: payload.email } ]} })
         if(data) throw new ConflictException('alredy username or email exists')
-        
-        await this.userModel.create(payload)
+        const hash = await hashPass(payload.password)
+        await this.userModel.create({...payload, password: hash})
         return 'admin succsessfull created !'
     }
 
@@ -39,9 +41,11 @@ export class UsersService {
     }
 
 
-    async updateUser(payload: UserUpdateDto) {
-        const user = await this.userModel.findByPk(payload.id)
+    async updateUser(user_id: string, payload: UserUpdateDto, filename?: string) {
+        const user = await this.userModel.findByPk(user_id)
         if(!user) throw new NotFoundException('user not found !')
+        
+        if(filename) user.avatar_url = filename
         await user.update(payload)
         return 'user successfully updated !'
     }

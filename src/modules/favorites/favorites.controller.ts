@@ -17,9 +17,10 @@ export class FavoritesController {
     
     @UseGuards(AuthGuard, RolesGuard)
     @Get(':id')
-    async getFavorite (id: string) {
+    async getFavorite (@Param('id') id: string) {
         return this.favoritesService.getFavorit(id)
     }
+
 
     @UseGuards(AuthGuard, RolesGuard)
     @Post('create')

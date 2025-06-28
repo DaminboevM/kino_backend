@@ -19,7 +19,8 @@ export class FavoritesService {
 
     
     async getFavorit (id: string) {
-        return this.favoriteModel.findByPk(id)
+        const data = await this.favoriteModel.findOne({where: {id}})
+        return data
     }
 
 
@@ -36,5 +37,12 @@ export class FavoritesService {
     }
     
 
-    async delete (id: string) {}
+    async delete (id: string) {
+        const data = await this.favoriteModel.findByPk(id)
+        if(!data) throw new NotFoundException('favorite not found !')
+        
+        await this.favoriteModel.destroy({where: {id}})
+        return {message: 'favorite succesfull deleted'}
+
+    }
 }
