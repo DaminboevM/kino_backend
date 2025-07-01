@@ -10,7 +10,7 @@ export class SubscriptionPlans extends Model{
     @Column({type: DataType.STRING(50)})
     name: string
 
-    @Column({type: DataType.DECIMAL(10,2)})
+    @Column({type: DataType.INTEGER})
     price: number
 
     @Column({type: DataType.INTEGER})

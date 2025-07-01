@@ -39,7 +39,7 @@ export class AuthService {
 
 
 
-    async register (payload: Required<RegisterDto>) {
+    async register (payload: RegisterDto) {
         const user = await this.userModel.findOne({where: {[Op.or]: [{username: payload.username}, {email: payload.email}]}})
         if(user) throw new ConflictException('Invalid username or email')
 
@@ -71,7 +71,7 @@ export class AuthService {
 
 
 
-    async login (payload: Required<LoginDto>) {
+    async login (payload: LoginDto) {
         const user = await this.userModel.findOne({where: {username: payload.username}})
         if(!user || !(await compirePass(payload.password, user.dataValues.password))) {
             throw new ConflictException('Invalid username or password')
@@ -83,7 +83,7 @@ export class AuthService {
 
 
 
-    async refreshToken ({token}: Required<TokenDto>) {
+    async refreshToken ({token}: TokenDto) {
         try {
             const data = await this.jwtService.verifyAsync(token)
             const user = await this.userModel.findByPk(data.id)

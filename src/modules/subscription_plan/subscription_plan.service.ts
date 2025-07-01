@@ -21,17 +21,17 @@ export class SubscriptionPlanService {
     }
 
 
-    async create (payload: Required<CreateSubscriptionPlansDto>) {
-        await this.subscriptionPlansModel.create(payload)
-        return 'subscription plans succsessful created !!!'
+    async create (payload: CreateSubscriptionPlansDto) {
+        await this.subscriptionPlansModel.create(payload as any)
+        return {message: 'subscription plans succsessful created !!!'}
     }
 
 
-    async update (payload: Required<UpdateSubscriptionPlansDto>) {
-        const data = await this.subscriptionPlansModel.findByPk(payload.id)
+    async update (payload: UpdateSubscriptionPlansDto) {
+        const data = await this.subscriptionPlansModel.findOne({where: {id: payload.id}})
         if(!data) throw new NotFoundException('not found !')
         data.update(payload)
-        return 'subscription plans succsessful updated !!!'
+        return {message: 'subscription plans succsessful updated !!!'}
     }
 
 
@@ -40,6 +40,6 @@ export class SubscriptionPlanService {
         if(!data) throw new NotFoundException('not found !')
         this.subscriptionPlansModel.destroy({where: {id}})
         
-        return 'subscription plans succsessful deleted !!!'
-    }   
+        return {messgae: 'subscription plans succsessful deleted !!!'}
+    }
 }

@@ -15,6 +15,9 @@ export class UserSubscriptions extends Model {
     @Column({type: DataType.DATE, defaultValue: new Date() })
     start_date: Date;
 
+    @Column({type: DataType.DATE, defaultValue: new Date() })
+    endDate: Date;
+
     @Column({type: DataType.ENUM(...Object.values(Status)), defaultValue: Status.pending_payment})
     status: Status
 

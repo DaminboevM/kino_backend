@@ -21,6 +21,9 @@ export class MovieFiles extends Model{
     @Column({type: DataType.UUID, onDelete: 'CASCADE'})
     movie_id: string
 
+    @Column({type: DataType.STRING})
+    size: string
+
     @BelongsTo(() => Movies)
     movie: Movies
 }

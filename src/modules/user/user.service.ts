@@ -23,21 +23,21 @@ export class UsersService {
     }
 
 
-    async addAdmin(payload: Required<AddAdminDto>) {
+    async addAdmin(payload: AddAdminDto) {
         const data = await this.userModel.findOne({ where: { [Op.or]: [ { username: payload.username }, { email: payload.email } ]} })
         if(data) throw new ConflictException('alredy username or email exists')
         const hash = await hashPass(payload.password)
         await this.userModel.create({...payload, password: hash})
-        return 'admin succsessfull created !'
+        return {message: 'admin succsessfull created !'}
     }
 
 
-    async updateUserForAdmin(id: Required<UuidParamDto>) {
+    async updateUserForAdmin(id: UuidParamDto) {
         const data = await this.userModel.findByPk(id as any)
         if(!data) throw new NotFoundException('user not found !')
 
         data.update({role: UserRole.ADMIN})
-        return 'user role successfully updated to admin !'
+        return {message: 'user role successfully updated to admin !'}
     }
 
 
@@ -47,13 +47,13 @@ export class UsersService {
         
         if(filename) user.avatar_url = filename
         await user.update(payload)
-        return 'user successfully updated !'
+        return {message: 'user successfully updated !'}
     }
 
 
     async deleteUser (id: string) {
         const user = await this.userModel.destroy({where: {id}})
         if(!user) throw new NotFoundException('user not found !')
-        return 'user successfully deleted'
+        return {message: 'user successfully deleted'}
     }
 }

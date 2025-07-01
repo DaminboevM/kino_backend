@@ -4,6 +4,7 @@ import { Favorites } from 'src/common/models/favorites.models';
 import { CrateFavoritesDto } from './dto/createFavorites.dto';
 import { User } from 'src/common/models/user.models';
 import { Movies } from 'src/common/models/movies.models';
+import { ParamDto } from './dto/param.dto';
 
 @Injectable()
 export class FavoritesService {
@@ -18,8 +19,9 @@ export class FavoritesService {
     }
 
     
-    async getFavorit (id: string) {
-        const data = await this.favoriteModel.findOne({where: {id}})
+    async getFavorit (user_id: string) {
+        const data = await this.favoriteModel.findAll({ where: { user_id } })
+        if(!data) throw new NotFoundException('favorit nor found !')
         return data
     }
 

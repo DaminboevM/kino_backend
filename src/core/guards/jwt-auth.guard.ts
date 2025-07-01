@@ -12,7 +12,10 @@ export class AuthGuard implements CanActivate {
         const request = context.switchToHttp().getRequest();
         let token = this.CheckToken(request);
 
-        if (!token) throw new UnauthorizedException()
+
+        console.log(token);
+        
+        if (!token) throw new UnauthorizedException("slaom")
 
         try {
             let payload = await this.jwtService.verifyAsync(token, JwtAccsesToken)
@@ -20,6 +23,8 @@ export class AuthGuard implements CanActivate {
             
             return true
         } catch (error) {
+            console.log(error);
+            
             if(error.name === 'TokenExpiredError') throw new UnauthorizedException('token expire !')
             throw new UnauthorizedException('Invalide token !')
         }

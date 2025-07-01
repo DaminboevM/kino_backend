@@ -1,18 +1,23 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsBoolean, IsDecimal, IsJSON, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateSubscriptionPlansDto {
 
+    @ApiProperty()
     @IsString()
     @IsNotEmpty()
     name: string
 
-    @IsDecimal({ decimal_digits: '2', force_decimal: true })
-    price: string;
+    @ApiProperty()
+    @IsNumber()
+    price: number;
 
+    @ApiProperty()
     @IsNumber()
     @IsNotEmpty()
     duration_days: number
 
+    @ApiProperty()
     @IsArray()
     @IsNotEmpty()
     features: string

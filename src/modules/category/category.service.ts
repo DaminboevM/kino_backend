@@ -18,17 +18,17 @@ export class CategoryService {
     }
 
 
-    async create (payload: Required<CreateCategoryDto>) {
+    async create (payload: CreateCategoryDto) {
         const data = await this.categoryModel.findOne({where: {slug: payload.slug}})
         if(data) throw new ConflictException('category alredy exists !')
-        await this.categoryModel.create(payload)
+        await this.categoryModel.create(payload as any)
         
         return {
             message: 'category succsesfull created !'
         }
     }
 
-    async update (payload: Required<UpdateCategoryDto>) {
+    async update (payload: UpdateCategoryDto) {
         const data = await this.categoryModel.findByPk(payload.id)
         if(!data) throw new ConflictException('category not found !')
         await data.update(payload)

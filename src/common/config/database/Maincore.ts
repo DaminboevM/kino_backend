@@ -11,12 +11,25 @@ import { SubscriptionPlanModule } from "src/modules/subscription_plan/subscripti
 import { UserModule } from "src/modules/user/user.module";
 import { UserSubscriptionModule } from "src/modules/user_subscription/user_subscription.module";
 import { WatchHistoryModule } from "src/modules/watch_history/watch_history.module";
+import { PymentModule } from "src/modules/pyment/pyment.module";
 
 
 
 @Module({
-    imports:[AuthModule, Database, CategoryModule, FavoritesModule, MovieFilesModule, MoviyModule, MovieFilesModule, MovieCategoriesModule,
-        ReviwsModule, SubscriptionPlanModule, UserModule, UserSubscriptionModule, WatchHistoryModule
+    imports:[
+        AuthModule, 
+        CategoryModule, 
+        FavoritesModule, 
+        MovieFilesModule, 
+        MoviyModule, 
+        MovieCategoriesModule,
+        ReviwsModule, 
+        SubscriptionPlanModule, 
+        UserModule, 
+        UserSubscriptionModule, 
+        WatchHistoryModule, 
+        Database, 
+        PymentModule
     ]
 })
 

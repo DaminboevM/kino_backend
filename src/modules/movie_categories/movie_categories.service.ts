@@ -14,18 +14,18 @@ export class MovieCategoriesService {
     ) {}
 
     async getAll () {
-        return this.movieCategoryModel.findAll()
+        return this.movieCategoryModel.findAll({include: [{model: Categories}, {model: Movies}]})
     }
 
 
-    async create (payload: Required<CreateMovieCategoryDto>) {
+    async create (payload: CreateMovieCategoryDto) {
         const movie = await this.movieModel.findByPk(payload.movie_id)
         if(!movie) throw new NotFoundException('movie not found !')
 
         const category = await this.categoryModel.findByPk(payload.category_id)
         if(!category) throw new NotFoundException('category not found !')
         
-        await this.movieCategoryModel.create(payload)
+        await this.movieCategoryModel.create(payload as any)
         return { message: 'movie_category succes created !!'}
     }
 

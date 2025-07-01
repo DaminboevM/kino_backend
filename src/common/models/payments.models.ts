@@ -8,7 +8,7 @@ export class Payments extends Model{
     @Column({type: DataType.UUID, defaultValue: uuidv4(), primaryKey: true})
     declare id: string
 
-    @Column({type: DataType.DECIMAL(10,2)})
+    @Column({type: DataType.INTEGER})
     amount: number
 
     @Column({type: DataType.ENUM(...Object.values(PaymentMethod))})
@@ -21,7 +21,7 @@ export class Payments extends Model{
     status: PymentStatus
 
     @Column({type: DataType.STRING})
-    external_transaction_id: string
+    external_transaction_id?: string
 
     @ForeignKey(() => UserSubscriptions)
     @Column({type: DataType.UUID, onDelete: 'CASCADE'})

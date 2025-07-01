@@ -1,4 +1,4 @@
-import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
 import { v4 as uuidv4 } from 'uuid'
 import { MovieCategories } from "./movie_categories.models";
 
@@ -17,5 +17,5 @@ export class Categories extends Model{
     description: string
 
     @HasMany(() => MovieCategories)
-    movieCategories: MovieCategories[]    
+    movieCategories: MovieCategories
 }
